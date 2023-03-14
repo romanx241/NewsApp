@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:name="androidx.navigation.fragment.NavHostFragment"
             app:defaultNavHost= "true"
-            app:navGraf="navigation/nav_graph"/>
+            app:navGraph="@navigation/nav_graph"/>
 
     </FrameLayout>
 
@@ -29,6 +29,7 @@
             android:id="@+id/bottom_nav_menu"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            app:menu="@menu/bottom_nav_menu"
             android:background="@color/lightGrey"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

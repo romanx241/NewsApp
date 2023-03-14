@@ -6,24 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ru.netology.newsapp.R
+import ru.netology.newsapp.databinding.FragmentDetailsBinding
+import ru.netology.newsapp.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
-    }
+    private var _binding: FragmentMainBinding? = null
+    private val mBinding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        _binding = FragmentMainBinding.inflate(layoutInflater, container, false)
+        return mBinding.root
     }
-
 
 }
