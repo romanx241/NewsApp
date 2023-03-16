@@ -23,7 +23,6 @@ abstract class ArticleDataBase: RoomDatabase() {
                 ArticleDataBase::class.java,
                 "article_database"
             ).build()
-
         }
     }
 }

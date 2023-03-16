@@ -1,9 +1,7 @@
 package ru.netology.newsapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -13,14 +11,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.netology.newsapp.databinding.ActivityMainBinding
-import ru.netology.newsapp.databinding.FragmentDetailsBinding
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
     private val mBinding get() = _binding!!
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +30,6 @@ class MainActivity : AppCompatActivity() {
             )
         }
     }
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
