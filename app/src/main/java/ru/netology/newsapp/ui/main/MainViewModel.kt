@@ -11,6 +11,7 @@ import ru.netology.newsapp.utils.Resource
 import javax.inject.Inject
 
 @HiltViewModel
+
 class MainViewModel @Inject constructor(private val repository: NewsRepository) : ViewModel(){
 
     val newsLiveData: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()

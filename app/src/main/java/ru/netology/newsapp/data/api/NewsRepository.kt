@@ -8,5 +8,8 @@ class NewsRepository @Inject constructor(private val newsService: NewsService) {
 
         newsService.getHeadlines(countryCode = countryCode, page = pageNumber)
 
+    suspend fun getSearchNews(query : String, pageNumber : Int) =
+
+        newsService.getEverything(query = query, page = pageNumber)
 
 }

@@ -20,7 +20,6 @@ class MainFragment : Fragment() {
 
     private var _binding: FragmentMainBinding? = null
     private val mBinding get() = _binding!!
-
     private val viewModel by viewModels<MainViewModel>()
     lateinit var newsAdapter: NewsAdapter
 
