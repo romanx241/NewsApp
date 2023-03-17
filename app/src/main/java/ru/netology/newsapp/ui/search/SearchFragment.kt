@@ -51,9 +51,7 @@ class SearchFragment : Fragment() {
                     }
                 }
             }
-
         }
-
         viewModel.searchNewsLiveData.observe(viewLifecycleOwner) { responce ->
             when (responce) {
                 is Resource.Success -> {

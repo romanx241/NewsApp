@@ -9,7 +9,11 @@
         android:id="@+id/detailsFragment"
         android:name="ru.netology.newsapp.ui.details.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="article"
+            app:argType="ru.netology.newsapp.models.Article" />
+    </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="ru.netology.newsapp.ui.main.MainFragment"

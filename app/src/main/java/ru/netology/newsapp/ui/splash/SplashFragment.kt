@@ -1,12 +1,10 @@
 package ru.netology.newsapp.ui.splash
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ru.netology.newsapp.R
-import ru.netology.newsapp.databinding.FragmentDetailsBinding
+import androidx.fragment.app.Fragment
 import ru.netology.newsapp.databinding.FragmentSplashBinding
 
 
