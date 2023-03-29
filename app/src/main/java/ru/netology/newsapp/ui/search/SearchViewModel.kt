@@ -10,21 +10,22 @@ import ru.netology.newsapp.models.NewsResponse
 import ru.netology.newsapp.utils.Resource
 import javax.inject.Inject
 
+
 @HiltViewModel
-class SearchViewModel @Inject constructor(private val repository: NewsRepository) : ViewModel(){
+class SearchViewModel @Inject constructor(private val repository: NewsRepository): ViewModel() {
 
     val searchNewsLiveData: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
-    var searchNewPage = 1
+    var searchNewsPage = 1
 
     init {
         getSearchNews("")
     }
 
-    fun getSearchNews(query : String) =
+    fun getSearchNews(query: String) =
         viewModelScope.launch {
             searchNewsLiveData.postValue(Resource.Loading())
-            val response = repository.getSearchNews(query=query, pageNumber = searchNewPage)
-            if(response.isSuccessful){
+            val response = repository.getSearchNews(query = query, pageNumber = searchNewsPage)
+            if (response.isSuccessful) {
                 response.body().let { res ->
                     searchNewsLiveData.postValue(Resource.Success(res))
                 }
@@ -32,5 +33,4 @@ class SearchViewModel @Inject constructor(private val repository: NewsRepository
                 searchNewsLiveData.postValue(Resource.Error(message = response.message()))
             }
         }
-
 }

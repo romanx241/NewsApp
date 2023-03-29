@@ -11,21 +11,20 @@ import ru.netology.newsapp.utils.Resource
 import javax.inject.Inject
 
 @HiltViewModel
-
-class MainViewModel @Inject constructor(private val repository: NewsRepository) : ViewModel(){
+class MainViewModel @Inject constructor(private val repository: NewsRepository): ViewModel() {
 
     val newsLiveData: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
-    var newPage = 1
+    var newsPage = 1
 
     init {
         getNews("ru")
     }
 
-    private fun getNews(countryCode : String) =
+    private fun getNews(countryCode: String) =
         viewModelScope.launch {
             newsLiveData.postValue(Resource.Loading())
-            val response = repository.getNews(countryCode = countryCode, pageNumber = newPage)
-            if(response.isSuccessful){
+            val response = repository.getNews(countryCode = countryCode, pageNumber = newsPage)
+            if (response.isSuccessful) {
                 response.body().let { res ->
                     newsLiveData.postValue(Resource.Success(res))
                 }
@@ -33,6 +32,5 @@ class MainViewModel @Inject constructor(private val repository: NewsRepository) 
                 newsLiveData.postValue(Resource.Error(message = response.message()))
             }
         }
-
 
 }

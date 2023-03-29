@@ -25,6 +25,7 @@ class SearchFragment : Fragment() {
 
     private var _binding: FragmentSearchBinding? = null
     private val mBinding get() = _binding!!
+
     private val viewModel by viewModels<SearchViewModel>()
     lateinit var newsAdapter: NewsAdapter
 
@@ -38,22 +39,22 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initAdapter()
 
+        initAdapter()
         var job: Job? = null
-        ed_search.addTextChangedListener { text : Editable? ->
+        ed_search.addTextChangedListener { text: Editable? ->
             job?.cancel()
             job = MainScope().launch {
                 delay(500L)
-                text.let {
-                    if(it.toString().isNotEmpty()){
+                text?.let {
+                    if (it.toString().isNotEmpty()) {
                         viewModel.getSearchNews(query = it.toString())
                     }
                 }
             }
         }
         viewModel.searchNewsLiveData.observe(viewLifecycleOwner) { responce ->
-            when (responce) {
+            when(responce) {
                 is Resource.Success -> {
                     pag_search_progress_bar.visibility = View.INVISIBLE
                     responce.data?.let {
@@ -63,13 +64,16 @@ class SearchFragment : Fragment() {
                 is Resource.Error -> {
                     pag_search_progress_bar.visibility = View.INVISIBLE
                     responce.data?.let {
-                        Log.e("chekData", "MainFragment: error: ${it}")
+                        Log.e("checkData", "MainFragment: error: ${it}")
                     }
                 }
-                is Resource.Loading -> { pag_search_progress_bar.visibility = View.VISIBLE }
+                is Resource.Loading -> {
+                    pag_search_progress_bar.visibility = View.VISIBLE
+                }
             }
         }
     }
+
     private fun initAdapter() {
         newsAdapter = NewsAdapter()
         search_news_adapter.apply {

@@ -11,23 +11,23 @@ import kotlinx.android.synthetic.main.item_article.view.*
 import ru.netology.newsapp.R
 import ru.netology.newsapp.models.Article
 
-class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder> (){
 
-    inner class NewsViewHolder(view:View): RecyclerView.ViewHolder(view)
+class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
-    private val callBack = object : DiffUtil.ItemCallback<Article>(){
+    inner class NewsViewHolder(view: View): RecyclerView.ViewHolder(view)
 
+    private val callback = object : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem.url == newItem.url
         }
 
         override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
-            return oldItem == newItem
-
+            return  oldItem == newItem
         }
     }
 
-    val differ = AsyncListDiffer(this, callBack)
+    val differ = AsyncListDiffer(this, callback)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         return NewsViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_article, parent, false)
@@ -42,8 +42,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder> (){
             article_title.text = article.title
             article_data.text = article.publishedAt
 
-
-            setOnItemClickListener {
+            setOnClickListener {
                 onItemClickListener?.let { it(article) }
             }
         }
@@ -53,8 +52,10 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder> (){
         return differ.currentList.size
     }
 
-    private var onItemClickListener : ((Article) -> Unit)? = null
-    fun setOnItemClickListener(listener: (Article) -> Unit){
+    private var onItemClickListener: ((Article) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Article) -> Unit) {
         onItemClickListener = listener
     }
+
 }

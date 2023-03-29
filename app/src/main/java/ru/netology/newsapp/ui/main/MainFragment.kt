@@ -18,18 +18,17 @@ import ru.netology.newsapp.ui.adapters.NewsAdapter
 import ru.netology.newsapp.utils.Resource
 
 @AndroidEntryPoint
-
 class MainFragment : Fragment() {
-
     private var _binding: FragmentMainBinding? = null
     private val mBinding get() = _binding!!
+
     private val viewModel by viewModels<MainViewModel>()
     lateinit var newsAdapter: NewsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         _binding = FragmentMainBinding.inflate(layoutInflater, container, false)
         return mBinding.root
     }
@@ -47,7 +46,7 @@ class MainFragment : Fragment() {
         }
 
         viewModel.newsLiveData.observe(viewLifecycleOwner) { responce ->
-            when (responce) {
+            when(responce) {
                 is Resource.Success -> {
                     pag_progress_bar.visibility = View.INVISIBLE
                     responce.data?.let {
@@ -57,13 +56,16 @@ class MainFragment : Fragment() {
                 is Resource.Error -> {
                     pag_progress_bar.visibility = View.INVISIBLE
                     responce.data?.let {
-                        Log.e("chekData", "MainFragment: error: ${it}")
+                        Log.e("checkData", "MainFragment: error: ${it}")
                     }
                 }
-                is Resource.Loading -> { pag_progress_bar.visibility = View.VISIBLE }
+                is Resource.Loading -> {
+                    pag_progress_bar.visibility = View.VISIBLE
+                }
             }
         }
     }
+
     private fun initAdapter() {
         newsAdapter = NewsAdapter()
         news_adapter.apply {
